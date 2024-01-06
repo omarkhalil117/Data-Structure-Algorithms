@@ -92,7 +92,6 @@ public:
 
         if (!pHead)
         {
-            pHead = nullptr;
             delete p;
             count--;
             return out;

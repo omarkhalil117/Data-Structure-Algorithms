@@ -46,7 +46,6 @@ public:
     {
         while (!pHead)
         {
-
             Node<T> *ptr = pHead;
             pHead = pHead->next;
             delete ptr;
@@ -63,6 +62,8 @@ public:
             push(curr->data);
             curr = curr->next;
         }
+
+        reverseStack();
     }
 
     void push(T d)
@@ -74,12 +75,9 @@ public:
             pHead = newNode;
             newNode->next = nullptr;
         }
-        else
-        {
-            newNode->next = pHead;
-            pHead = newNode;
-        }
 
+        newNode->next = pHead;
+        pHead = newNode;
         count++;
     }
 
@@ -119,7 +117,6 @@ public:
     void mergeStack(Stack<T> &S)
     {
         Node<T> *p = new Node<T>();
-        Node<T> *pBefore = new Node<T>();
         p = pHead;
         while (p->next != nullptr)
         {
@@ -133,12 +130,22 @@ public:
     void reverseStack()
     {
         Stack<T> temp;
+        Node<T> *pDel = nullptr;
+        Node<T> *oldHead = pHead;
+
         while (pHead != nullptr)
         {
             temp.push(pop());
         }
-
         pHead = temp.pHead;
+
+        // delete old nodes
+        while (!oldHead)
+        {
+            pDel = oldHead;
+            oldHead = oldHead->next;
+            delete pDel;
+        }
     }
 };
 
